@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Preference.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Ride.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/StopOver.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Vehicle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +72,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "mahdimerge",
+    "git-widget-placeholder": "mahdi",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -133,7 +122,7 @@
       <workItem from="1744649049316" duration="12718000" />
       <workItem from="1744669963731" duration="8418000" />
       <workItem from="1744725976240" duration="340000" />
-      <workItem from="1744727438971" duration="9764000" />
+      <workItem from="1744727438971" duration="10306000" />
     </task>
     <servers />
   </component>
