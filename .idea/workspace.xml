@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="" />
+    <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/GreenFleet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GreenFleet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/GreenBackApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/GreenBackApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -35,51 +44,56 @@
     &quot;accountId&quot;: &quot;d754c2da-34cb-4077-8fe3-a22415d81213&quot;
   }
 }</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/StopOver.java" root0="FORCE_HIGHLIGHTING" />
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="mavenHome" value="Use Maven wrapper" />
       </MavenGeneralSettings>
     </option>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2v87gqeN1ghUbSLu2npvbmGVAer" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Maven.GreenBack [clean].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "Spring Boot.GreenBackApplication.executor": "Run",
+    "aspect.path.notification.shown": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "mahdi",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "aziz",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/HP/Desktop/projet_web_/spring/SpringMVC",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   },
@@ -89,12 +103,20 @@
     ]
   }
 }]]></component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\mahdi\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="e507cfd6-3f3d-4935-a9bd-e5fd08607b06" reportId="GreenBack/qodana/2025-04-14" />
-    </option>
-  </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="GreenFleet" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="GreenFleet" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GreenBackApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="GreenBack" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.GreenBack.GreenBackApplication" />
@@ -102,14 +124,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -119,10 +133,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743514961392</updated>
-      <workItem from="1744649049316" duration="12718000" />
-      <workItem from="1744669963731" duration="8418000" />
-      <workItem from="1744725976240" duration="340000" />
-      <workItem from="1744727438971" duration="10306000" />
+      <workItem from="1744647515678" duration="1257000" />
+      <workItem from="1744648799532" duration="29289000" />
     </task>
     <servers />
   </component>
