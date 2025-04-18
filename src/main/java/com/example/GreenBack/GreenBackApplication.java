@@ -20,26 +20,7 @@ public class GreenBackApplication {
 		SpringApplication.run(GreenBackApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner run(UserRepository userRepository) {
-		return args -> {
-			User user = User.builder()
-					.firstname("aziz")
-					.lastname("moussi")
-					.email("moussi.aziz@ensi.com")
-					.password("ensiisne")
-					.phoneNumber("1234567890")
-					.gender(Gender.Male)
-					.dateOfBirth(LocalDate.of(2002, 11, 28))
-					.rating(4.5f)
-					.gamificationPoints(30)
-					.verified(false)
-					.profilePictureUrl("images/aziz.jpg")
-					.build();
 
-			userRepository.save(user);
-		};
-	}
 
 
 

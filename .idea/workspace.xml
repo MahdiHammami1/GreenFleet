@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/GreenFleet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GreenFleet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/GreenBackApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/GreenBackApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -85,7 +86,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "aziz",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/HP/Desktop/projet_web_/spring/SpringMVC",
+    "last_opened_file_path": "C:/Users/HP/Desktop/PCD/GreenFleet-Back",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,6 +104,15 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.GreenBack.Responses" />
+      <recent name="com.example.GreenBack.service.impl" />
+      <recent name="com.example.GreenBack.dto" />
+      <recent name="com.example.GreenBack.controller" />
+      <recent name="com.example.GreenBack.config" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="GreenFleet" />
@@ -135,6 +145,10 @@
       <updated>1743514961392</updated>
       <workItem from="1744647515678" duration="1257000" />
       <workItem from="1744648799532" duration="29289000" />
+      <workItem from="1744727301373" duration="165000" />
+      <workItem from="1744759062736" duration="4268000" />
+      <workItem from="1744802627075" duration="4748000" />
+      <workItem from="1744980088474" duration="13029000" />
     </task>
     <servers />
   </component>
