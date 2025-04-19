@@ -25,7 +25,10 @@ public interface  RideService {
 
     Optional<Ride> publishRide(Long id);
 
+    Optional<Ride> updateRide( Ride ride);
+
     Optional<Ride> updateAvailableSeats(Long rideId, int seatsBooked);
+
 
 
 

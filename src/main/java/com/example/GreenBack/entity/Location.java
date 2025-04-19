@@ -10,6 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 public class Location {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idLocation;
     private double latitude;
     private double longitude;
     private String nameLocation;

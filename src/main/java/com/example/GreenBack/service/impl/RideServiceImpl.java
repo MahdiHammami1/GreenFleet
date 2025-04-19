@@ -17,7 +17,6 @@ public class RideServiceImpl implements RideService {
     private final RideRepository rideRepository;
 
 
-    @Autowired
     public RideServiceImpl(RideRepository rideRepository) {
         this.rideRepository = rideRepository;
     }
@@ -68,6 +67,12 @@ public class RideServiceImpl implements RideService {
             return rideRepository.save(ride);
         });
     }
+
+    @Override
+    public Optional<Ride> updateRide(Ride ride) {
+        return rideRepository.UpdateRide(ride);
+    }
+
 
 
     @Override

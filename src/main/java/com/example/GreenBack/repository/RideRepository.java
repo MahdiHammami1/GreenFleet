@@ -16,5 +16,7 @@ public interface RideRepository extends JpaRepository<Ride,Long> {
 
     Optional<Ride> findRideByLocationName(String locationName);
 
+    Optional<Ride> UpdateRide( Ride ride);
+
 
 }
