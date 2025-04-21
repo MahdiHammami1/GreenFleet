@@ -19,13 +19,11 @@ public interface  RideService {
 
     Optional<Ride> getRideByDate(LocalDate date) ;
     Optional<Ride> getRideByTime(LocalTime time);
-    Optional<Ride> getRideByLocationName(String location);
 
     void deleteRide(Long id);
 
-    Optional<Ride> publishRide(Long id);
 
-    Optional<Ride> updateRide( Ride ride);
+    Optional<Ride> updateRideById(Long  id ,  Ride ride);
 
     Optional<Ride> updateAvailableSeats(Long rideId, int seatsBooked);
 

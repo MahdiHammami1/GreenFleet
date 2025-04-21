@@ -26,6 +26,7 @@ public class Ride {
     private boolean published;
     private double totalDistance;
 
+
     @OneToMany(mappedBy = "ride", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Preference> preferences;
 
@@ -38,6 +39,8 @@ public class Ride {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User driver;
+
+
 
 }
 

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("")
+@RequestMapping("Stopovers")
 public class StopoverController {
     private final StopoverService stopoverService;
 
@@ -21,39 +21,39 @@ public class StopoverController {
         this.stopoverService = stopoverService ;
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<List<Stopover>> getAllStopovers() {
         List<Stopover> stopovers = stopoverService.getAllStopover();
         return ResponseEntity.ok(stopovers) ;
     }
 
-    @GetMapping
+    @GetMapping("/getById")
     public ResponseEntity<Optional<Stopover>> getStopoverById(@RequestParam Long id) {
         Optional<Stopover> stopover  = stopoverService.getStopoverById(id) ;
         return ResponseEntity.ok( stopover) ;
 
     }
 
-    @GetMapping
+    @GetMapping("/getByLocationName")
     public ResponseEntity<Optional<Stopover>> getStopoverByLocationName(@RequestParam String locationName) {
         Optional<Stopover> stopover = stopoverService.getStopoverByLocationName(locationName) ;
         return  ResponseEntity.ok(stopover);
 
     }
 
-    @GetMapping
+    @GetMapping("/getByRideId")
     public ResponseEntity<Optional<Stopover>> getStopoverByRideId(@RequestParam Long rideId) {
         Optional<Stopover> stopover = stopoverService.getStopoverByRideId(rideId) ;
         return ResponseEntity.ok(stopover);
     }
 
-    @PostMapping
+    @PostMapping("/postStopover")
     public ResponseEntity<Optional<Stopover>> addStopover(@RequestBody Stopover stopover) {
         Optional<Stopover> newStopover = stopoverService.addStopover(stopover) ;
         return ResponseEntity.ok(newStopover) ;
     }
 
-    @PutMapping
+    @PutMapping("/putStopover")
     public ResponseEntity<String> updateStopover(@RequestBody Stopover stopover , @RequestParam Long id) {
         stopoverService.updateStopoverById(id , stopover) ;
         return ResponseEntity.ok("Ride Successfully updated") ;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/Admin")
 public class AdminController {
     private final AdminService adminService;
 
@@ -20,7 +20,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping
+    @GetMapping("/admins")
     public ResponseEntity<Optional<List<Admin>>> getAllAdmins() {
         Optional<List<Admin>> admins = adminService.getAllAdmins();
         return ResponseEntity.ok(admins);

@@ -30,15 +30,15 @@ public class Booking {
     @AttributeOverrides({
             @AttributeOverride(name = "latitude", column = @Column(name = "pickup_latitude")),
             @AttributeOverride(name = "longitude", column = @Column(name = "pickup_longitude")),
-            @AttributeOverride(name = "name", column = @Column(name = "pickup_name"))
+            @AttributeOverride(name = "nameLocation", column = @Column(name = "pickup_name"))
     })
     private Location pickupLocation;
 
-    @Embedded
+ ;   @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "latitude", column = @Column(name = "dropoff_latitude")),
             @AttributeOverride(name = "longitude", column = @Column(name = "dropoff_longitude")),
-            @AttributeOverride(name = "name", column = @Column(name = "dropoff_name"))
+            @AttributeOverride(name = "nameLocation", column = @Column(name = "dropoff_name"))
     })
     private Location dropoffLocation;
 }

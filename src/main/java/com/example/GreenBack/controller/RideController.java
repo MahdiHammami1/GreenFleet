@@ -22,13 +22,13 @@ public class RideController {
         this.rideService = rideService;
     }
 
-    @GetMapping
+    @GetMapping("/getRides")
     public ResponseEntity<List<Ride>> getRides() {
         List<Ride> rides = rideService.getAllRides();
         return ResponseEntity.ok(rides);
     }
 
-    @GetMapping
+    @GetMapping("/getById")
     public ResponseEntity<Optional<Ride>> getRideById(@RequestParam Long id) {
         Optional<Ride> ride = rideService.getRideById(id) ;
         return  ResponseEntity.ok(ride);
@@ -36,21 +36,16 @@ public class RideController {
     }
 
 
-    @GetMapping
-    public ResponseEntity<Optional<Ride>> getRideByLocationName(@RequestParam String locationName) {
-        Optional<Ride> ride = rideService.getRideByLocationName(locationName) ;
-        return  ResponseEntity.ok(ride);
 
-    }
 
-    @GetMapping
+    @GetMapping("/getByDate")
     public ResponseEntity<Optional<Ride>> getRideByDate(@RequestParam LocalDate date) {
          Optional<Ride> ride = rideService.getRideByDate(date) ;
          return  ResponseEntity.ok(ride);
 
     }
 
-    @GetMapping
+    @GetMapping("/getByTime")
     public ResponseEntity<Optional<Ride>> getRideByTime(@RequestParam LocalTime time) {
         Optional<Ride> ride = rideService.getRideByTime(time) ;
         return  ResponseEntity.ok(ride);
@@ -69,13 +64,13 @@ public class RideController {
     }
 
 
-    @PutMapping
-    public ResponseEntity<String> updateRide(@RequestBody Ride ride) {
-        rideService.updateRide(ride) ;
+    @PutMapping("/updateRide")
+    public ResponseEntity<String> updateRideById(@RequestParam Long id , @RequestBody Ride ride  ) {
+        rideService.updateRideById(id , ride) ;
         return ResponseEntity.ok("Ride Successfully updated") ;
     }
 
-    @PutMapping
+    @PutMapping("/updateseats ")
     public ResponseEntity<Ride> updateAvailableSeats(@RequestBody Ride ride , @RequestParam Long rideId, @RequestParam int seats) {
         rideService.updateAvailableSeats(rideId, seats) ;
         return ResponseEntity.ok(ride) ;

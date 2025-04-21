@@ -6,6 +6,7 @@ import com.example.GreenBack.service.RideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -36,11 +37,7 @@ public class RideServiceImpl implements RideService {
         return rideRepository.findById(id) ;
     }
 
-    @Override
-    public Optional<Ride> getRideByLocationName(String locationName) {
-        return rideRepository.findRideByLocationName(locationName);
 
-    }
 
     @Override
     public Optional<Ride> getRideByDate(LocalDate date){
@@ -60,17 +57,17 @@ public class RideServiceImpl implements RideService {
         rideRepository.deleteById(id);
     }
 
-    @Override
-    public Optional<Ride> publishRide(Long id) {
-        return rideRepository.findById(id).map(ride -> {
-            ride.setPublished(true);
-            return rideRepository.save(ride);
-        });
-    }
+
 
     @Override
-    public Optional<Ride> updateRide(Ride ride) {
-        return rideRepository.UpdateRide(ride);
+    public Optional<Ride> updateRideById(Long id , Ride ride) {
+        Optional<Ride> optionalRide = rideRepository.findById(id);
+        if (optionalRide.isPresent()) {
+            rideRepository.save(ride);
+            return Optional.of(ride);
+        }else {
+            return Optional.empty();
+        }
     }
 
 
