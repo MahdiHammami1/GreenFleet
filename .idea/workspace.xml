@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="Merge branch 'aziz' into mahdimerge&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;pom.xml&#10;#&#9;src/main/resources/application.properties">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/RideRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/RideRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/StopoverRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/StopoverRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/AdminService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/RideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/RideService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/RideServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/RideServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/StopoverServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/StopoverServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +160,9 @@
       <workItem from="1744842632329" duration="53000" />
       <workItem from="1744922153812" duration="1547000" />
       <workItem from="1745000807102" duration="4217000" />
-      <workItem from="1745059987281" duration="12601000" />
+      <workItem from="1745059987281" duration="18149000" />
+      <workItem from="1745149026300" duration="3232000" />
+      <workItem from="1745156894288" duration="16227000" />
     </task>
     <servers />
   </component>

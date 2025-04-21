@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AdminService {
+
+    Optional<List<Admin>> getAllAdmins();
     List<User> getAllUsers();
     void deleteUserById(Long id);
     List<Vehicle> getAllVehicles();

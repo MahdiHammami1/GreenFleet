@@ -3,14 +3,20 @@ package com.example.GreenBack.service.impl;
 import com.example.GreenBack.entity.Stopover;
 import com.example.GreenBack.repository.StopoverRepository;
 import com.example.GreenBack.service.StopoverService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class StopoverServiceImpl implements StopoverService {
-    private StopoverRepository stopoverRepository;
-    public StopoverServiceImpl() {
-        super();
+    private final StopoverRepository stopoverRepository;
+
+    @Autowired
+    public StopoverServiceImpl(StopoverRepository stopoverRepository) {
+
+        this.stopoverRepository=stopoverRepository ;
     }
 
     @Override
@@ -34,7 +40,7 @@ public class StopoverServiceImpl implements StopoverService {
         if (existingStopoverOpt.isPresent()) {
             Stopover existingStopover = existingStopoverOpt.get();
 
-            // Update fields
+
             existingStopover.setStopoverStatus(newStopoverData.getStopoverStatus());
             existingStopover.setLocation(newStopoverData.getLocation());
 
@@ -45,7 +51,7 @@ public class StopoverServiceImpl implements StopoverService {
         }
     }
     @Override
-    public Optional addStopover(Stopover stopover) {
+    public Optional<Stopover> addStopover(Stopover stopover) {
         stopoverRepository.save(stopover);
         return Optional.of(stopover);
 
