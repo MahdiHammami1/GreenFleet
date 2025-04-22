@@ -29,6 +29,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(registeredUser);
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto){
         User authenticatedUser = authenticationService.authenticate(loginUserDto);

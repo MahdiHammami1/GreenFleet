@@ -43,14 +43,19 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(input.getPassword()))
                 .firstname(input.getFirstname())
                 .lastname(input.getLastname())
+                .phoneNumber(input.getPhoneNumber())
+                .dateOfBirth(input.getDateOfBirth())
+                .gender(input.getGender())
                 .build();
 
         user.setVerificationCode(generateVerificationCode());
         user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
         user.setEnabled(false);
+
         sendVerificationEmail(user);
         return userRepository.save(user);
     }
+
 
     public User authenticate(LoginUserDto input) {
         User user = userRepository.findByEmail(input.getEmail())

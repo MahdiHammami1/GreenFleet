@@ -4,4 +4,6 @@ public enum Badge {
     BRONZE,
     SILVER,
     GOLD
+
+
 }
