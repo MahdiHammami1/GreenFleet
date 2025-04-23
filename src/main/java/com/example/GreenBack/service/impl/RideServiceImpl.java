@@ -1,12 +1,14 @@
 package com.example.GreenBack.service.impl;
 
+import com.example.GreenBack.dto.RideDTO;
+import com.example.GreenBack.entity.Booking;
+import com.example.GreenBack.entity.Preference;
 import com.example.GreenBack.entity.Ride;
+import com.example.GreenBack.entity.Stopover;
 import com.example.GreenBack.repository.RideRepository;
 import com.example.GreenBack.service.RideService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -81,4 +83,27 @@ public class RideServiceImpl implements RideService {
         });
     }
 
+    private RideDTO convertToDto(Ride ride) {
+        RideDTO dto = new RideDTO();
+        dto.setRideId(ride.getRideId());
+        dto.setRideDate(ride.getRideDate());
+        dto.setRideTime(ride.getRideTime());
+        dto.setNumberOfSeat(ride.getNumberOfSeat());
+        dto.setAvailableSeats(ride.getAvailableSeats());
+        dto.setPublished(ride.isPublished());
+        dto.setTotalDistance(ride.getTotalDistance());
+        dto.setDriverId(ride.getDriver() != null ? ride.getDriver().getUserId() : null);
+        dto.setPreferenceIds(ride.getPreferences() != null
+                ? ride.getPreferences().stream().map(Preference::getPreferenceId).toList()
+                : List.of());
+        dto.setBookingIds(ride.getBookings() != null
+                ? ride.getBookings().stream().map(Booking::getBookingId).toList()
+                : List.of());
+        dto.setStopoverIds(ride.getStopovers() != null
+                ? ride.getStopovers().stream().map(Stopover::getIdStopover).toList()
+                : List.of());
+        return dto;
+    }
 }
+
+
