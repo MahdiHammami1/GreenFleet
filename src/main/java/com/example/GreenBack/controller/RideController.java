@@ -28,7 +28,9 @@ public class RideController {
     @PostMapping("/searchRides")
     public ResponseEntity<List<RideResponseDto>> searchRides(@RequestBody RideSearchDTO searchCriteria) {
         List<RideResponseDto> matchedRides = rideService.searchRides(searchCriteria);
-        return ResponseEntity.ok(matchedRides);
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/json; charset=utf-8")
+                .body(matchedRides);
     }
 
 

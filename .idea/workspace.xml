@@ -6,22 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/Responses/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/Responses/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/VehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/VehicleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Ride.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Ride.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Stopover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Stopover.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/RideRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/RideRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/VehicleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/VehicleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/VehicleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/VehicleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/RideController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/RideController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +115,7 @@
       <recent name="com.example.GreenBack.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DistanceServiceTest">
+  <component name="RunManager" selected="Spring Boot.GreenBackApplication">
     <configuration name="DistanceServiceTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.GreenBack.DistanceServiceTest" />
       <module name="GreenBack" />
@@ -217,7 +202,7 @@
       <workItem from="1745499834547" duration="12061000" />
       <workItem from="1745576186479" duration="39003000" />
       <workItem from="1745684209790" duration="2272000" />
-      <workItem from="1745705957871" duration="10761000" />
+      <workItem from="1745705957871" duration="15712000" />
     </task>
     <servers />
   </component>
