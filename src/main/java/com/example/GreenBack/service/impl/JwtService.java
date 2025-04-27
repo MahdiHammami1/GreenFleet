@@ -75,11 +75,16 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getUserId());
         claims.put("email", user.getEmail());
+        claims.put("role", user.getRole().name());
         return generateToken(claims,userDetails);
     }
 
     private boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
+    }
+
+    public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {

@@ -20,6 +20,11 @@ public class Stopover {
     private StopoverStatus stopoverStatus;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "latitude", column = @Column(name = "location_latitude", nullable = false)),
+            @AttributeOverride(name = "longitude", column = @Column(name = "location_longitude", nullable = false)),
+            @AttributeOverride(name = "name", column = @Column(name = "location_name", nullable = false))
+    })
     private Location location;
 
     @ManyToOne

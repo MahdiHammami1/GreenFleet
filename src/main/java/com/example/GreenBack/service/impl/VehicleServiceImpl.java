@@ -96,4 +96,11 @@ public class VehicleServiceImpl implements VehicleService {
     public Vehicle getVehicleByRideId(Long RideID) {
         return null;
     }
+
+
+    public String getProfileImageFilename(Long vehicleId) {
+        System.out.println("VEHICLE    "+vehicleRepository.getVehicleByVehicleId(vehicleId).getPictureUrl());
+        return vehicleRepository.getVehicleByVehicleId(vehicleId).getPictureUrl();
+    }
+
 }

@@ -19,7 +19,6 @@ public class Ride {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rideId;
-
     private LocalDate rideDate;
     private LocalTime rideTime;
     private int numberOfSeat;
@@ -39,6 +38,12 @@ public class Ride {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User driver;
+
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+
 
 }
 

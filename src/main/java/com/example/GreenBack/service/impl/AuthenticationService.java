@@ -2,14 +2,17 @@ package com.example.GreenBack.service.impl;
 
 
 
+import com.example.GreenBack.dto.AdminSignupDto;
 import com.example.GreenBack.dto.LoginUserDto;
 import com.example.GreenBack.dto.RegisterUserDto;
 import com.example.GreenBack.dto.VerifyUserDto;
 import com.example.GreenBack.entity.User;
+import com.example.GreenBack.enums.Role;
 import com.example.GreenBack.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +27,50 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final EmailService emailService;
+    private final JwtService jwtService;
 
     public AuthenticationService(
             UserRepository userRepository,
             AuthenticationManager authenticationManager,
             PasswordEncoder passwordEncoder,
-            EmailService emailService
+            EmailService emailService,
+            JwtService jwtService
     ) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+        this.jwtService=jwtService;
     }
+    public String registerAdmin(AdminSignupDto dto) {
+        Optional<User> existing = userRepository.findByEmail(dto.getEmail());
+        if (existing.isPresent()) {
+            throw new IllegalArgumentException("Email already in use");
+        }
+        User admin = User.builder()
+                .firstname(dto.getFirstname())
+                .lastname(dto.getLastname())
+                .email(dto.getEmail())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .phoneNumber(dto.getPhoneNumber())
+                .enabled(true)
+                .verified(true)
+                .role(Role.ADMIN)
+                .build();
+        userRepository.save(admin);
+        return jwtService.generateToken(admin);
+    }
+    public String loginAdmin(LoginUserDto dto) {
+        Authentication auth = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword())
+        );
+        User user = (User) auth.getPrincipal();
+        if (!user.getRole().equals(Role.ADMIN)) {
+            throw new RuntimeException("Access denied: Not an admin");
+        }
+        return jwtService.generateToken(user);
+    }
+
 
     public User signup(RegisterUserDto input) {
         User user = User.builder()
@@ -47,11 +82,10 @@ public class AuthenticationService {
                 .dateOfBirth(input.getDateOfBirth())
                 .gender(input.getGender())
                 .build();
-
         user.setVerificationCode(generateVerificationCode());
         user.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
         user.setEnabled(false);
-
+        user.setRole(Role.USER);
         sendVerificationEmail(user);
         return userRepository.save(user);
     }

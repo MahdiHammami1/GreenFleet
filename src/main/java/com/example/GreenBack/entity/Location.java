@@ -10,8 +10,11 @@ import lombok.*;
 @AllArgsConstructor
 public class Location {
 
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+
+    private Double longitude;
+
     private String name;
+
 }
 

@@ -2,10 +2,12 @@ package com.example.GreenBack.entity;
 
 import com.example.GreenBack.enums.Badge;
 import com.example.GreenBack.enums.Gender;
+import com.example.GreenBack.enums.Role;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
@@ -44,7 +46,7 @@ public class User implements UserDetails {
 
     private LocalDate dateOfBirth;
 
-    private Float rating;
+    private Double rating;
     private Integer gamificationPoints;
     private boolean verified;
     private String profilePictureUrl;
@@ -66,6 +68,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private List<Badge> badges;
 
+    @Enumerated(EnumType.STRING)
+    private Role role; // USER, ADMIN
+
+
     public User(String email, String password) {
         this.email=email;
         this.password=password;
@@ -81,8 +87,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role));
     }
+
 
     @Override
     public String getPassword() {

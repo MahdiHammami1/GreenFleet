@@ -1,5 +1,6 @@
 package com.example.GreenBack.controller;
 
+import com.example.GreenBack.dto.ChangePasswordRequestDto;
 import com.example.GreenBack.dto.UserDto;
 import com.example.GreenBack.dto.UserUpdateDto;
 import com.example.GreenBack.dto.VehicleDTO;
@@ -13,6 +14,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,9 +76,11 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
 
     @PutMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(
@@ -96,10 +100,10 @@ public class UserController {
     @PatchMapping("/{userId}/password")
     public ResponseEntity<Void> changePassword(
             @PathVariable Long userId,
-            @RequestParam @NotBlank String oldPassword,
-            @RequestParam @NotBlank String newPassword) {
+            @RequestBody ChangePasswordRequestDto request
 
-        userService.changePassword(userId, oldPassword, newPassword);
+    ) {
+        userService.changePassword(userId, request.getOldPassword(), request.getNewPassword());
         return ResponseEntity.ok().build();
     }
 

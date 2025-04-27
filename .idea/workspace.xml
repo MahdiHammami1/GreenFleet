@@ -6,18 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="5311fab5-0dff-4d96-a8fb-63e1afbbe482" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/GreenBackApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/GreenBackApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/config/ApplicationConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/config/ApplicationConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/Responses/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/Responses/LoginResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/config/SecurityConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/dto/RegisterUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/dto/RegisterUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/VehicleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/controller/VehicleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Ride.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Ride.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Stopover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Stopover.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/entity/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/enums/Badge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/enums/Badge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/RideRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/RideRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/VehicleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/repository/VehicleRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/VehicleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenBack/service/impl/VehicleServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -81,7 +84,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.DistanceServiceTest.executor": "Run",
     "HTTP Request.generated-requests | #2.executor": "Run",
+    "JUnit.DistanceServiceTest.testGetDistanceAndDuration.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -98,7 +103,7 @@
     "git-widget-placeholder": "aziz",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/HP/Desktop/PCD/GreenFleet-Back",
+    "last_opened_file_path": "C:/Users/HP/Desktop/PCD/GreenFleet-main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -125,9 +130,38 @@
       <recent name="com.example.GreenBack.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.GreenBackApplication">
+  <component name="RunManager" selected="Application.DistanceServiceTest">
+    <configuration name="DistanceServiceTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.GreenBack.DistanceServiceTest" />
+      <module name="GreenBack" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.GreenBack.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="2" requestIdentifier="#2" runType="Run single request">
       <method v="2" />
+    </configuration>
+    <configuration name="DistanceServiceTest.testGetDistanceAndDuration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GreenBack" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.GreenBack.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.GreenBack" />
+      <option name="MAIN_CLASS_NAME" value="com.example.GreenBack.DistanceServiceTest" />
+      <option name="METHOD_NAME" value="testGetDistanceAndDuration" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="GreenFleet" />
@@ -151,6 +185,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DistanceServiceTest" />
+        <item itemvalue="JUnit.DistanceServiceTest.testGetDistanceAndDuration" />
         <item itemvalue="HTTP Request.generated-requests | #2" />
       </list>
     </recent_temporary>
@@ -176,6 +212,12 @@
       <workItem from="1745274333872" duration="1438000" />
       <workItem from="1745275904322" duration="3084000" />
       <workItem from="1745280682431" duration="8272000" />
+      <workItem from="1745343361889" duration="8637000" />
+      <workItem from="1745414430124" duration="9197000" />
+      <workItem from="1745499834547" duration="12061000" />
+      <workItem from="1745576186479" duration="39003000" />
+      <workItem from="1745684209790" duration="2272000" />
+      <workItem from="1745705957871" duration="10761000" />
     </task>
     <servers />
   </component>

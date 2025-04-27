@@ -23,7 +23,7 @@ public class UserDto {
     private String phoneNumber;
     private Gender gender;
     private LocalDate dateOfBirth;
-    private Float rating;
+    private Double rating;
     private Integer gamificationPoints;
     private boolean verified;
     private String profilePictureUrl;
@@ -31,6 +31,4 @@ public class UserDto {
     private List<Long> vehicles;
     private List<Long> bookings;
     private List<Badge> badges;
-
-
 }
