@@ -1,9 +1,8 @@
 package com.example.GreenBack.service.impl;
 
-import com.example.GreenBack.dto.RideDTO;
-import com.example.GreenBack.dto.RideResponseDto;
-import com.example.GreenBack.dto.RideSearchDTO;
+import com.example.GreenBack.dto.*;
 import com.example.GreenBack.entity.*;
+import com.example.GreenBack.enums.BookingStatus;
 import com.example.GreenBack.enums.StopoverStatus;
 import com.example.GreenBack.mapper.RideMapper;
 import com.example.GreenBack.repository.*;
@@ -28,12 +27,11 @@ public class RideServiceImpl implements RideService {
     private final StopoverRepository stopoverRepository;
     private final PreferenceRepository preferenceRepository;
     private final DistanceService distanceService;
+    private final BookingRepository bookingRepository;
 
 
-
-
-
-    public RideServiceImpl(RideRepository rideRepository, UserRepository userRepository, VehicleRepository vehicleRepository, StopoverRepository stopoverRepository, PreferenceRepository preferenceRepository, DistanceService distanceService) {
+    public RideServiceImpl(RideRepository rideRepository, UserRepository userRepository, VehicleRepository vehicleRepository, StopoverRepository stopoverRepository, PreferenceRepository preferenceRepository, DistanceService distanceService,
+                           BookingRepository bookingRepository) {
         this.rideRepository = rideRepository;
         this.userRepository = userRepository;
         this.vehicleRepository = vehicleRepository;
@@ -41,6 +39,7 @@ public class RideServiceImpl implements RideService {
         this.stopoverRepository = stopoverRepository;
         this.preferenceRepository = preferenceRepository;
         this.distanceService = distanceService;
+        this.bookingRepository = bookingRepository;
     }
 
     @Override
@@ -93,8 +92,6 @@ public class RideServiceImpl implements RideService {
     }
 
 
-
-
     @Override
     public List<Ride> getAllRides() {
         return rideRepository.findAll();
@@ -105,83 +102,67 @@ public class RideServiceImpl implements RideService {
         return rideRepository.findById(id) ;
     }
 
-
     @Transactional(readOnly = true)
     public List<RideResponseDto> searchRides(RideSearchDTO searchCriteria) {
-        System.out.println("Starting searchRides...");
-        List<Ride> rides = rideRepository.findAll();
-        System.out.println("Total rides fetched: " + rides.size());
+        System.out.println("Starting searchRides from stopovers...");
 
         List<RideResponseDto> matchedRides = new ArrayList<>();
-
         LocalDate requestedDate = searchCriteria.getDate();
         LocalTime requestedArrivalTime = searchCriteria.getTime();
-        System.out.println("Search criteria date: " + requestedDate + ", time: " + requestedArrivalTime);
 
-        for (Ride ride : rides) {
-            System.out.println("Checking ride: " + ride.getRideId());
+        List<Stopover> stopovers = stopoverRepository.findAll(); // Ideally filter this with radius directly in DB if possible
 
-            if (!ride.isPublished()) {
-                System.out.println("Ride " + ride.getRideId() + " is not published, skipping...");
+        for (Stopover stopover : stopovers) {
+            Location stopoverLocation = stopover.getLocation();
+
+            DistanceService.DistanceDurationResponse distanceDuration = distanceService.getDistanceAndDuration(
+                    formatLocation(searchCriteria.getFromLocation().getLatitude(), searchCriteria.getFromLocation().getLongitude()),
+                    formatLocation(stopoverLocation.getLatitude(), stopoverLocation.getLongitude())
+            );
+
+            if (distanceDuration == null) {
+                System.out.println("Distance service returned null, skipping stopover...");
                 continue;
             }
 
-            if (!ride.getRideDate().isEqual(requestedDate)) {
-                System.out.println("Ride " + ride.getRideId() + " date " + ride.getRideDate() + " does not match requested date " + requestedDate + ", skipping...");
+            double distanceInMeters = parseDistanceToMeters(distanceDuration.distanceText());
+            if (distanceInMeters > searchCriteria.getRayonPossible() * 1000) {
                 continue;
             }
 
-            for (Stopover stopover : ride.getStopovers()) {
-                System.out.println("Checking stopover at location: " + stopover.getLocation().getLatitude() + "," + stopover.getLocation().getLongitude());
+            Ride ride = stopover.getRide();
 
-                DistanceService.DistanceDurationResponse distanceDuration = distanceService.getDistanceAndDuration(
-                        formatLocation(searchCriteria.getFromLocation().getLatitude(), searchCriteria.getFromLocation().getLongitude()),
-                        formatLocation(stopover.getLocation().getLatitude(), stopover.getLocation().getLongitude())
-                );
+            if (!ride.isPublished()) continue;
+            if (!ride.getRideDate().isEqual(requestedDate)) continue;
+            if (!ride.getRideTime().equals(requestedArrivalTime)) continue;
 
-                if (distanceDuration == null) {
-                    System.out.println("Distance service returned null, skipping stopover...");
-                    continue;
-                }
+            RideResponseDto response = new RideResponseDto();
+            response.setRideId(ride.getRideId());
+            response.setDriverId(ride.getDriver().getUserId());
+            response.setDriverName(ride.getDriver().getFirstname() + " " + ride.getDriver().getLastname());
+            response.setCarName(ride.getVehicle().getBrand() + " " + ride.getVehicle().getModel());
+            response.setRateDriver(ride.getDriver().getRating());
+            response.setStopoverName(stopoverLocation.getName());
+            response.setDistanceBetween(distanceDuration.distanceText());
+            response.setPrefrences(
+                    ride.getPreferences().stream()
+                            .map(Preference::getDescription)
+                            .toList()
+            );
 
-                double distanceInMeters = parseDistanceToMeters(distanceDuration.distanceText());
-                System.out.println("Distance to stopover: " + distanceInMeters + " meters");
+            matchedRides.add(response);
 
-                if (distanceInMeters > searchCriteria.getRayonPossible()) {
-                    System.out.println("Distance " + distanceInMeters + " is greater than allowed " + searchCriteria.getRayonPossible() + ", skipping stopover...");
-                    continue;
-                }
-
-                LocalTime stopoverArrivalTime = ride.getRideTime();
-                System.out.println("Ride time: " + stopoverArrivalTime + ", requested arrival time: " + requestedArrivalTime);
-
-                if (stopoverArrivalTime.equals(requestedArrivalTime)) {
-                    System.out.println("Matched ride " + ride.getRideId() + "! Creating RideResponseDto...");
-
-                    RideResponseDto response = new RideResponseDto();
-                    response.setDriverId(ride.getDriver().getUserId());
-                    response.setDriverName(ride.getDriver().getFirstname() + " " + ride.getDriver().getLastname());
-                    response.setCarName(ride.getVehicle().getBrand() + " " + ride.getVehicle().getModel());
-                    response.setRateDriver(ride.getDriver().getRating()); // Assuming driver has a rate field
-                    response.setStopoverName(stopover.getLocation().getName()); // Assuming Location has a name
-                    response.setDistanceBetween(distanceDuration.distanceText());
-                    response.setPrefrences(
-                            ride.getPreferences()
-                                    .stream()
-                                    .map(Preference::getDescription)
-                                    .toList()
-                    );
-
-
-                    matchedRides.add(response);
-                    break; // Stop checking other stopovers once matched
-                } else {
-                    System.out.println("Ride time does not match requested time.");
-                }
-            }
         }
 
-        System.out.println("Total matched rides: " + matchedRides.size());
+        // Sort: by rating desc, distance asc
+        matchedRides.sort((r1, r2) -> {
+            int rateCompare = Double.compare(r2.getRateDriver(), r1.getRateDriver());
+            if (rateCompare != 0) return rateCompare;
+            double d1 = parseDistanceToMeters(r1.getDistanceBetween());
+            double d2 = parseDistanceToMeters(r2.getDistanceBetween());
+            return Double.compare(d1, d2);
+        });
+
         return matchedRides;
     }
 
@@ -194,19 +175,24 @@ public class RideServiceImpl implements RideService {
 
     // Helper to parse "2.3 km" to meters
     private double parseDistanceToMeters(String distanceText) {
-        distanceText = distanceText.replace(",", "."); // Replace , with . if necessary
-        if (distanceText.contains("km")) {
-            double kmValue = Double.parseDouble(distanceText.replace("km", "").trim());
-            return kmValue * 1000;
-        } else if (distanceText.contains("m")) {
-            return Double.parseDouble(distanceText.replace("m", "").trim());
-        } else {
-            throw new IllegalArgumentException("Unknown distance format: " + distanceText);
+        if (distanceText == null || distanceText.isEmpty()) {
+            throw new IllegalArgumentException("Distance text is null or empty");
+        }
+
+        distanceText = distanceText.replace(",", "."); // Replace , with .
+        try {
+            if (distanceText.contains("km")) {
+                double kmValue = Double.parseDouble(distanceText.replace("km", "").trim());
+                return kmValue * 1000;
+            } else if (distanceText.contains("m")) {
+                return Double.parseDouble(distanceText.replace("m", "").trim());
+            } else {
+                throw new IllegalArgumentException("Unknown distance format: " + distanceText);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Failed to parse distance: " + distanceText, e);
         }
     }
-
-
-
 
 
 
@@ -223,7 +209,7 @@ public class RideServiceImpl implements RideService {
 
 
 
-    @Override
+
     public void deleteRide(Long id) {
         rideRepository.deleteById(id);
     }
@@ -253,5 +239,104 @@ public class RideServiceImpl implements RideService {
     }
 
 
+
+    public RideExtendedDto convertToRideExtendedDto(Ride ride) {
+        RideExtendedDto rideExtendedDto = new RideExtendedDto();
+
+        List<StopoverDTO> stopoverDTOs = ride.getStopovers().stream()
+                .map(stopover -> {
+                    StopoverDTO dto = new StopoverDTO();
+                    dto.setStopoverStatus(String.valueOf(stopover.getStopoverStatus()));
+                    dto.setLatitude(stopover.getLocation().getLatitude());
+                    dto.setLongitude(stopover.getLocation().getLongitude());
+                    dto.setName(stopover.getLocation().getName());
+                    return dto;
+                })
+                .toList();
+
+        List<String> preferenceStrings = ride.getPreferences().stream()
+                .map(preference -> preference.getDescription())
+                .toList();
+
+
+        List<Booking> bookings = bookingRepository.findByRide_RideId(ride.getRideId());
+        List<RequestBookingDto> bookingDtoList = bookings.stream()
+                .map(booking -> {
+                    RequestBookingDto dto = new RequestBookingDto();
+                    dto.setRideId(ride.getRideId());
+                    dto.setPassengerName(booking.getPassenger().getFirstname() + " " + booking.getPassenger().getLastname());
+                    dto.setPassengerId(booking.getPassenger().getUserId());
+                    dto.setPassengerRate(booking.getPassenger().getRating());
+                    dto.setStopoverName(booking.getPickupLocation());
+                    dto.setBookingStatus(booking.getBookingStatus());
+                    return dto;
+                })
+                .toList();
+
+        return new RideExtendedDto(
+                ride.getRideId(),
+                ride.getRideDate(),
+                ride.getRideTime(),
+                ride.getNumberOfSeat(),
+                ride.isPublished(),
+                ride.getAvailableSeats(),
+                ride.getDriver().getUserId(),
+                ride.getVehicle().getVehicleId(),
+                preferenceStrings,
+                stopoverDTOs,
+                bookingDtoList
+        );
+    }
+
+
+
+    @Transactional
+    public void updateStart(Long rideId, int stopoverIndex) {
+        Ride ride = rideRepository.findById(rideId)
+                .orElseThrow(() -> new RuntimeException("Ride not found"));
+
+        List<Booking> bookings = bookingRepository.findByRide_RideId(rideId);
+
+        if (stopoverIndex == 0) {
+            for (Booking booking : bookings) {
+                if (booking.getBookingStatus() == BookingStatus.ACCEPTED) {
+                    booking.setBookingStatus(BookingStatus.ONGOING);
+                }
+            }
+        } else if (stopoverIndex == 1) {
+            for (Booking booking : bookings) {
+                if (booking.getBookingStatus() == BookingStatus.ONGOING) {
+                    booking.setBookingStatus(BookingStatus.REACHED);
+                }
+            }
+        }
+
+        bookingRepository.saveAll(bookings);
+    }
+
+
+
+
+    @Transactional
+    public void updateAccept(Long rideId, Long passengerId, boolean accept) {
+        List<Booking> bookings = bookingRepository.findByRide_RideId(rideId);
+        for (Booking booking : bookings) {
+            if (booking.getPassenger().getUserId() == passengerId) {
+                booking.setBookingStatus(accept?BookingStatus.ACCEPTED:BookingStatus.REJECTED);
+                bookingRepository.save(booking);
+            }
+        }
+
+    }
+
+
+
 }
+
+
+// Start -> rides/updateStart/rideId  ->  update all stopovers Status to ongoing
+// accept -> rides/updateAccept/rideId/passengerId   -> update the booking of the ride Id of passenger with passenger Id to ACCEPTEED
+// decline -> rides/updateAccept/rideId/passengerId   -> update the booking of the ride Id of passenger with passenger Id to ACCEPTEED
+// reached -> rides.updateReached/rideId
+
 

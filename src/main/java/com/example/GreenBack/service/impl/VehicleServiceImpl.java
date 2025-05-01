@@ -1,8 +1,14 @@
 package com.example.GreenBack.service.impl;
 
 import com.example.GreenBack.dto.VehicleDTO;
+import com.example.GreenBack.entity.Booking;
+import com.example.GreenBack.entity.Ride;
 import com.example.GreenBack.entity.User;
 import com.example.GreenBack.entity.Vehicle;
+import com.example.GreenBack.enums.BookingStatus;
+import com.example.GreenBack.enums.StopoverStatus;
+import com.example.GreenBack.repository.BookingRepository;
+import com.example.GreenBack.repository.RideRepository;
 import com.example.GreenBack.repository.UserRepository;
 import com.example.GreenBack.repository.VehicleRepository;
 import com.example.GreenBack.service.VehicleService;
@@ -21,6 +27,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
+    private final RideRepository rideRepository;
+    private final BookingRepository bookingRepository;
 
     @Transactional
     public VehicleDTO saveVehicle(VehicleDTO vehicleRequest) {
@@ -102,5 +110,14 @@ public class VehicleServiceImpl implements VehicleService {
         System.out.println("VEHICLE    "+vehicleRepository.getVehicleByVehicleId(vehicleId).getPictureUrl());
         return vehicleRepository.getVehicleByVehicleId(vehicleId).getPictureUrl();
     }
+
+
+
+
+
+
+
+
+
 
 }

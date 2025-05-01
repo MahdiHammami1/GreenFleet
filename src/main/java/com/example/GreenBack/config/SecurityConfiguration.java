@@ -40,6 +40,11 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/users/image/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/ws/**")).permitAll()  // Add this line
+                        .requestMatchers(new AntPathRequestMatcher("/ws")).permitAll()     // Add this line too
+                        .requestMatchers(new AntPathRequestMatcher("/messages/*")).permitAll()     // Add this line too
+                        .requestMatchers(new AntPathRequestMatcher("/messages/")).permitAll()     // Add this line too
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

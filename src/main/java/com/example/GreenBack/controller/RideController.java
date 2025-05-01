@@ -1,17 +1,20 @@
 package com.example.GreenBack.controller;
 
 
-import com.example.GreenBack.dto.RideDTO;
-import com.example.GreenBack.dto.RideResponseDto;
-import com.example.GreenBack.dto.RideSearchDTO;
+import com.example.GreenBack.dto.*;
+import com.example.GreenBack.entity.Booking;
 import com.example.GreenBack.entity.Ride;
+import com.example.GreenBack.service.impl.BookingServiceImpl;
 import com.example.GreenBack.service.impl.RideServiceImpl;
+import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -19,10 +22,12 @@ import java.util.Optional;
 @RequestMapping("/rides")
 public class RideController {
     private final RideServiceImpl rideService;
+    private final BookingServiceImpl bookingService;
 
 
-    public RideController(RideServiceImpl rideService) {
+    public RideController(RideServiceImpl rideService, BookingServiceImpl bookingService) {
         this.rideService = rideService;
+        this.bookingService = bookingService;
     }
 
     @PostMapping("/searchRides")
@@ -34,6 +39,8 @@ public class RideController {
     }
 
 
+
+
     @GetMapping("/getRides")
     public ResponseEntity<List<RideDTO>> getRides() {
         List<Ride> rides = rideService.getAllRides();
@@ -43,14 +50,13 @@ public class RideController {
         return ResponseEntity.ok(rideDTOs);
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<RideDTO> getRideById(@PathVariable Long id) {
+    public ResponseEntity<RideExtendedDto> getRideById(@PathVariable Long id) {
         Optional<Ride> rideOptional = rideService.getRideById(id);
 
         if (rideOptional.isPresent()) {
             Ride ride = rideOptional.get();
-            RideDTO rideDTO = RideDTO.convertToDTO(ride);
+            RideExtendedDto rideDTO = rideService.convertToRideExtendedDto(ride);
             return ResponseEntity.ok().
                     header("Content-Type", "application/json; charset=utf-8")
                     .body(rideDTO);
@@ -58,9 +64,6 @@ public class RideController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
 
     @GetMapping("/getByDate")
     public ResponseEntity<Optional<Ride>> getRideByDate(@RequestParam LocalDate date) {
@@ -74,7 +77,6 @@ public class RideController {
         Optional<Ride> ride = rideService.getRideByTime(time) ;
         return  ResponseEntity.ok(ride);
     }
-
     @DeleteMapping
     public ResponseEntity<String> deleteRide(@RequestParam Long id) {
         rideService.deleteRide(id) ;
@@ -106,5 +108,44 @@ public class RideController {
         rideService.updateAvailableSeats(rideId, seats) ;
         return ResponseEntity.ok(ride) ;
     }
+
+    @PutMapping("/update/{rideId}")
+    public ResponseEntity<String> updateStart(
+            @PathVariable Long rideId,
+            @RequestBody Map<String, Integer> body
+    ) {
+        try {
+            Integer stopoverIndex = body.get("stopoverIndex");
+            if (stopoverIndex == null) {
+                return ResponseEntity.badRequest().body("Missing stopoverIndex in request body");
+            }
+
+            rideService.updateStart(rideId, stopoverIndex);
+            return ResponseEntity.ok("Ride and bookings updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update ride: " + e.getMessage());
+        }
+    }
+
+
+    @PutMapping("/update/{rideId}/{passengerId}")
+    public ResponseEntity<String> updateAccept(
+            @PathVariable Long rideId,
+            @PathVariable Long passengerId,
+            @RequestParam boolean accept
+    ) {
+
+        try {
+            rideService.updateAccept(rideId, passengerId, accept);
+            return ResponseEntity.ok("Booking updated to " + (accept ? "ACCEPTED" : "REJECTED"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update booking: " + e.getMessage());
+        }
+    }
+
+
+
+
 }
 

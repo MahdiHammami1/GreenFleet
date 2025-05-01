@@ -18,7 +18,7 @@ public interface  RideService {
     Optional<Ride> getRideByDate(LocalDate date) ;
     Optional<Ride> getRideByTime(LocalTime time);
 
-    void deleteRide(Long id);
+
 
 
     Optional<Ride> updateRideById(Long  id ,  Ride ride);

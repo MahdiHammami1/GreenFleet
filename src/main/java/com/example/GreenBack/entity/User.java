@@ -3,6 +3,7 @@ package com.example.GreenBack.entity;
 import com.example.GreenBack.enums.Badge;
 import com.example.GreenBack.enums.Gender;
 import com.example.GreenBack.enums.Role;
+import com.example.GreenBack.enums.Status;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,8 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private String phoneNumber;
+    private String nickName;
+    private Status status;
 
     @Column(name = "verification_code")
     private String verificationCode;

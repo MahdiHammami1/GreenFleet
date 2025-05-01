@@ -3,9 +3,11 @@ package com.example.GreenBack;
 import com.example.GreenBack.entity.Admin;
 import com.example.GreenBack.entity.User;
 import com.example.GreenBack.entity.Vehicle;
+import com.example.GreenBack.enums.BookingStatus;
 import com.example.GreenBack.enums.Gender;
 
 import com.example.GreenBack.repository.AdminRepository;
+import com.example.GreenBack.repository.BookingRepository;
 import com.example.GreenBack.repository.UserRepository;
 import com.example.GreenBack.repository.VehicleRepository;
 import com.example.GreenBack.service.impl.UserServiceImpl;
@@ -27,10 +29,12 @@ public class GreenBackApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(VehicleRepository vehicleRepository) {
+	public CommandLineRunner demo(VehicleRepository vehicleRepository, BookingRepository bookingRepository) {
 		return (args) -> {
 			List<Vehicle> list = vehicleRepository.findAll();
 			System.out.println(">>> Found vehicles: " + list.size());
+
+
 
 		};
 	}

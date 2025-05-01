@@ -14,6 +14,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +32,7 @@ public class UserController {
 
     private final UserServiceImpl userService;
     private final ImageStorageService imageStorageService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @PostMapping("/upload/{userId}")
     public ResponseEntity<String> uploadProfilePicture(
@@ -56,9 +59,6 @@ public class UserController {
                 .header("Content-Type", contentType)
                 .body(image);
     }
-
-
-
 
 
     @GetMapping("/{userId}")
@@ -152,6 +152,32 @@ public class UserController {
     public ResponseEntity<Void> unbanUser(@PathVariable Long userId) {
         userService.unbanUser(userId);
         return ResponseEntity.ok().build();
+    }
+
+
+
+
+
+    @MessageMapping("/user.addUser")
+    public User addUser(User user) {
+        userService.saveUser(user);
+        // Send message to the specific user after they are added
+        messagingTemplate.convertAndSend(
+                "/user/" + user.getUserId() + "/queue/messages", user);
+        return user;
+    }
+
+    @MessageMapping("/user.disconnectUser")
+    public User disconnectUser(User user) {
+        userService.disconnect(user);
+        // Notify other users
+        messagingTemplate.convertAndSend("/user/public", user);
+        return user;
+    }
+
+    @GetMapping("/users/online")
+    public List<User> getOnlineUsers() {
+        return userService.findConnectedUser();
     }
 
 

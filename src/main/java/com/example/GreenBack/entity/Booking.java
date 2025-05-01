@@ -1,5 +1,6 @@
 package com.example.GreenBack.entity;
 
+import com.example.GreenBack.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,35 +11,22 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Booking {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingId;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User passenger;
-
     @ManyToOne
     @JoinColumn(name = "ride_id")
     private Ride ride;
-
     private String feedback;
-    private Float rating;
+    private Double rating;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "latitude", column = @Column(name = "pickup_latitude")),
-            @AttributeOverride(name = "longitude", column = @Column(name = "pickup_longitude")),
-            @AttributeOverride(name = "name", column = @Column(name = "pickup_name"))
-    })
-    private Location pickupLocation;
+    @Enumerated(EnumType.STRING)
+    private BookingStatus bookingStatus;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "latitude", column = @Column(name = "dropoff_latitude")),
-            @AttributeOverride(name = "longitude", column = @Column(name = "dropoff_longitude")),
-            @AttributeOverride(name = "name", column = @Column(name = "dropoff_name"))
-    })
-    private Location dropoffLocation;
+    private String pickupLocation;
+
+
 }

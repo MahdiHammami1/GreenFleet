@@ -1,7 +1,9 @@
 package com.example.GreenBack.dto;
 
+import com.example.GreenBack.entity.Booking;
 import com.example.GreenBack.entity.Ride;
 import com.example.GreenBack.entity.Stopover;
+import com.example.GreenBack.repository.BookingRepository;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -25,18 +27,21 @@ public class RideDTO {
 
     private List<String> preferences;
     private List<StopoverDTO> stopovers;
+   // private List<RequestBookingDto> booking;
 
     public static RideDTO convertToDTO(Ride ride) {
-        List<StopoverDTO> stopoverDTOs = ride.getStopovers().stream()
-                .map(stopover -> {
-                    StopoverDTO dto = new StopoverDTO();
-                    dto.setStopoverStatus(String.valueOf(stopover.getStopoverStatus()));
-                    dto.setLatitude(stopover.getLocation().getLatitude());
-                    dto.setLongitude(stopover.getLocation().getLongitude());
-                    dto.setName(stopover.getLocation().getName());
-                    return dto;
-                })
-                .toList();
+        // booking l list mte3 l booking
+
+                List<StopoverDTO> stopoverDTOs = ride.getStopovers().stream()
+                        .map(stopover -> {
+                            StopoverDTO dto = new StopoverDTO();
+                            dto.setStopoverStatus(String.valueOf(stopover.getStopoverStatus()));
+                            dto.setLatitude(stopover.getLocation().getLatitude());
+                            dto.setLongitude(stopover.getLocation().getLongitude());
+                            dto.setName(stopover.getLocation().getName());
+                            return dto;
+                        })
+                        .toList();
 
         // Convert Preference entities to strings
         List<String> preferenceStrings = ride.getPreferences().stream()
@@ -56,4 +61,6 @@ public class RideDTO {
                 stopoverDTOs
         );
     }
+
+
 }

@@ -1,10 +1,12 @@
 package com.example.GreenBack.service.impl;
 
+import com.example.GreenBack.dto.FriendChatDTO;
 import com.example.GreenBack.dto.UserDto;
 import com.example.GreenBack.dto.UserUpdateDto;
 import com.example.GreenBack.dto.VehicleDTO;
 import com.example.GreenBack.entity.*;
 import com.example.GreenBack.enums.Badge;
+import com.example.GreenBack.enums.Status;
 import com.example.GreenBack.repository.*;
 import com.example.GreenBack.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
     private final BookingRepository bookingRepository;
     private final PreferenceRepository preferenceRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ChatMessageRepository chatMessageRepository;
 
 
 
@@ -44,6 +47,24 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public void saveUser(User user){
+        user.setStatus(Status.ONLINE);
+        userRepository.save(user);
+
+    };
+    public void disconnect(User user){
+        var storedUser=userRepository.findById(user.getUserId()).orElse(null);
+        if(storedUser!=null){
+            storedUser.setStatus(Status.OFFLINE);
+        }
+
+    }
+
+    public List<User> findConnectedUser(){
+        return userRepository.findAllByStatus(Status.ONLINE);
+
     }
 
     @Transactional(readOnly = true)
@@ -246,6 +267,35 @@ public class UserServiceImpl implements UserService {
             User user=userRepository.findById(userId).orElseThrow();
             return user.getProfilePictureUrl();
     }
+
+
+    public List<FriendChatDTO> getChatFriends(String userId) {
+        List<ChatMessage> messages = chatMessageRepository.findMessagesInvolvingUser(userId);
+
+        Map<String, ChatMessage> lastMessages = new HashMap<>();
+        for (ChatMessage msg : messages) {
+            String friendId = msg.getSenderId().equals(userId) ? msg.getRecipientId() : msg.getSenderId();
+            if (!lastMessages.containsKey(friendId) || msg.getTimestamp().after(lastMessages.get(friendId).getTimestamp())) {
+                lastMessages.put(friendId, msg);
+            }
+        }
+
+        List<Long> friendIds = lastMessages.keySet().stream().map(Long::valueOf).toList();
+        List<User> users = userRepository.findAllByIdIn(friendIds);
+
+        return users.stream().map(user -> {
+            ChatMessage lastMsg = lastMessages.get(String.valueOf(user.getUserId()));
+            return FriendChatDTO.builder()
+                    .id(user.getUserId())
+                    .firstName(user.getFirstname())
+                    .lastName(user.getLastname())
+                    .profilePicture(user.getProfilePictureUrl())
+                    .lastMessage(lastMsg.getContent())
+                    .lastMessageTime(lastMsg.getTimestamp())
+                    .build();
+        }).toList();
+    }
+
 
 
 
