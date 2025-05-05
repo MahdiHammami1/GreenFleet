@@ -32,7 +32,7 @@ public class ChatMessageService {
 
     public List<ChatMessage> findChatMessages(String senderId, String recipientId) {
         return chatRoomService.getChatRoomId(senderId, recipientId, false)
-                .map(repository::findByChatId)
+                .map(repository::findByChatIdOrderByTimestampAsc)
                 .orElse(Collections.emptyList());
     }
 }

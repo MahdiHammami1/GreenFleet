@@ -41,14 +41,15 @@ public class RideController {
 
 
 
-    @GetMapping("/getRides")
-    public ResponseEntity<List<RideDTO>> getRides() {
-        List<Ride> rides = rideService.getAllRides();
-        List<RideDTO> rideDTOs = rides.stream()
-                .map(RideDTO::convertToDTO)
+    @GetMapping("/getRides/{id}")
+    public ResponseEntity<List<RideExtendedDto>> getRidesByUserId(@PathVariable Long id) {
+        List<Ride> rides = rideService.getRidesByUserId(id);
+        List<RideExtendedDto> rideDTOs = rides.stream()
+                .map(rideService::convertToRideExtendedDto)
                 .toList();
         return ResponseEntity.ok(rideDTOs);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<RideExtendedDto> getRideById(@PathVariable Long id) {
@@ -86,7 +87,7 @@ public class RideController {
     @PostMapping
     public ResponseEntity<?> createRide(@RequestBody RideDTO request) {
         Ride savedRide = rideService.saveRide(request);
-        return ResponseEntity.ok(savedRide.getRideId());
+        return ResponseEntity.ok(rideService.convertToRideExtendedDto(savedRide));
     }
 
 

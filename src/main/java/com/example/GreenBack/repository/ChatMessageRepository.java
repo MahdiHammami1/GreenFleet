@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> {
-    List<ChatMessage> findByChatId(String chatId);
+    List<ChatMessage> findByChatIdOrderByTimestampAsc(String chatId);
+
 
     @Query("SELECT m FROM ChatMessage m WHERE m.senderId = :userId OR m.recipientId = :userId")
     List<ChatMessage> findMessagesInvolvingUser(String userId);

@@ -97,6 +97,11 @@ public class RideServiceImpl implements RideService {
         return rideRepository.findAll();
     }
 
+    public List<Ride> getRidesByUserId(Long userId) {
+        return rideRepository.findRideByDriver_UserId(userId);
+    }
+
+
     @Override
     public Optional<Ride> getRideById(Long id) {
         return rideRepository.findById(id) ;
@@ -304,8 +309,16 @@ public class RideServiceImpl implements RideService {
                 }
             }
         } else if (stopoverIndex == 1) {
+
             for (Booking booking : bookings) {
                 if (booking.getBookingStatus() == BookingStatus.ONGOING) {
+                    booking.setBookingStatus(BookingStatus.REACHEDSTOP);
+                }
+            }
+        }
+        else if (stopoverIndex == 2) {
+            for (Booking booking : bookings) {
+                if (booking.getBookingStatus() == BookingStatus.REACHEDSTOP) {
                     booking.setBookingStatus(BookingStatus.REACHED);
                 }
             }

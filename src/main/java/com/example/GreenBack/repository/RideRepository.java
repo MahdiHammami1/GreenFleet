@@ -6,10 +6,14 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface RideRepository extends JpaRepository<Ride,Long> {
     Optional<Ride> getRideByRideDate(LocalDate rideDate);
     Optional<Ride> getRidesByRideTime(LocalTime rideTime);
+
+    List<Ride> findRideByDriver_UserId(Long driverId);
+
 }
