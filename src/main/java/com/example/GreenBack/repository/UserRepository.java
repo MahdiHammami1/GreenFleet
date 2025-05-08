@@ -4,6 +4,7 @@ import com.example.GreenBack.entity.User;
 import com.example.GreenBack.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,5 +19,13 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT u FROM User u WHERE u.userId IN :ids")
     List<User> findAllByIdIn(List<Long> ids);
+
+
+    List<User> findTop10ByOrderByGamificationPointsDesc();
+
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.badges WHERE u.userId = :id")
+    Optional<User> findByIdWithBadges(@Param("id") Long id);
+
+
 
 }

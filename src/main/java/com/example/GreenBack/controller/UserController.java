@@ -1,9 +1,6 @@
 package com.example.GreenBack.controller;
 
-import com.example.GreenBack.dto.ChangePasswordRequestDto;
-import com.example.GreenBack.dto.UserDto;
-import com.example.GreenBack.dto.UserUpdateDto;
-import com.example.GreenBack.dto.VehicleDTO;
+import com.example.GreenBack.dto.*;
 import com.example.GreenBack.entity.*;
 import com.example.GreenBack.enums.Badge;
 import com.example.GreenBack.service.impl.ImageStorageService;
@@ -75,8 +72,7 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/getall")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
@@ -179,6 +175,14 @@ public class UserController {
     public List<User> getOnlineUsers() {
         return userService.findConnectedUser();
     }
+
+
+    @GetMapping("/top")
+    public List<topUserDto> getTopUsers(){
+        return userService.getTopTenUsersByGamificationPoints();
+    }
+
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.GreenBack.service.impl;
 
+import com.example.GreenBack.dto.VehicleAdminDto;
 import com.example.GreenBack.dto.VehicleDTO;
 import com.example.GreenBack.entity.Booking;
 import com.example.GreenBack.entity.Ride;
@@ -62,6 +63,28 @@ public class VehicleServiceImpl implements VehicleService {
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<VehicleAdminDto> getAllVehiclesForAdmin() {
+        return vehicleRepository.findAll().stream()
+                .map(this::convertToAdminDto)
+                .collect(Collectors.toList());
+    }
+
+    private VehicleAdminDto convertToAdminDto(Vehicle vehicle) {
+        VehicleAdminDto dto = new VehicleAdminDto();
+        dto.setVehicleId(vehicle.getVehicleId());
+        dto.setLicenceNumber(vehicle.getLicenceNumber());
+        dto.setBrand(vehicle.getBrand());
+        dto.setModel(vehicle.getModel());
+        dto.setNumberOfSeat(vehicle.getNumberOfSeat());
+        dto.setRegistrationDate(vehicle.getRegistrationDate());
+        dto.setPictureUrl(vehicle.getPictureUrl());
+        dto.setOwnerName(vehicle.getOwner() != null ? (vehicle.getOwner().getFirstname()+" "+vehicle.getOwner().getLastname()): null);
+        return dto;
+    }
+
+
     private VehicleDTO convertToDto(Vehicle vehicle) {
         VehicleDTO dto = new VehicleDTO();
         dto.setVehicleId(vehicle.getVehicleId());

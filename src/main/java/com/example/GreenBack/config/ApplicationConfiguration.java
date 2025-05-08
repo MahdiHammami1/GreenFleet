@@ -60,7 +60,8 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("http://localhost:49161") // allows dynamic origins, safer than wildcard + credentials
+                        .allowedOriginPatterns("http://localhost:49161")
+                        .allowedOrigins("http://localhost:4200")// allows dynamic origins, safer than wildcard + credentials
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowCredentials(false);
             }

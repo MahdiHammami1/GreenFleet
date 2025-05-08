@@ -1,9 +1,6 @@
 package com.example.GreenBack.service.impl;
 
-import com.example.GreenBack.dto.FriendChatDTO;
-import com.example.GreenBack.dto.UserDto;
-import com.example.GreenBack.dto.UserUpdateDto;
-import com.example.GreenBack.dto.VehicleDTO;
+import com.example.GreenBack.dto.*;
 import com.example.GreenBack.entity.*;
 import com.example.GreenBack.enums.Badge;
 import com.example.GreenBack.enums.Status;
@@ -138,6 +135,28 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
+
+
+    public List<topUserDto> getTopTenUsersByGamificationPoints() {
+        List<User> topUsers = userRepository.findTop10ByOrderByGamificationPointsDesc();
+        return topUsers.stream()
+                .map(this::convertToTopUserDto)
+                .collect(Collectors.toList());
+    }
+    private topUserDto convertToTopUserDto(User user) {
+        topUserDto dto = new topUserDto();
+        dto.setFirstname(user.getFirstname());
+        dto.setLastname(user.getLastname());
+        if (user.getBadges() != null && !user.getBadges().isEmpty()) {
+            dto.setBadge(user.getBadges().get(0).toString());
+        } else {
+            dto.setBadge(null);
+        }
+        dto.setRating(user.getRating());
+        dto.setGamificationPoints(user.getGamificationPoints());
+        return dto;
+    }
+
 
 
 

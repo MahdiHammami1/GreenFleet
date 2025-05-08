@@ -1,5 +1,6 @@
 package com.example.GreenBack.controller;
 
+import com.example.GreenBack.dto.VehicleAdminDto;
 import com.example.GreenBack.dto.VehicleDTO;
 import com.example.GreenBack.entity.*;
 import com.example.GreenBack.service.impl.ImageStorageService;
@@ -84,6 +85,12 @@ public class VehicleController {
         return vehicleService.getVehicleById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<VehicleAdminDto>> getAllVehiclesForAdmin() {
+        return ResponseEntity.ok(vehicleService.getAllVehiclesForAdmin());
     }
 
     @GetMapping

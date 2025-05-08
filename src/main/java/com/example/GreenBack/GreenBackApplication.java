@@ -1,15 +1,21 @@
 package com.example.GreenBack;
 
+import com.example.GreenBack.dto.RideDTO;
+import com.example.GreenBack.dto.StopoverDTO;
 import com.example.GreenBack.entity.Admin;
+import com.example.GreenBack.entity.Ride;
 import com.example.GreenBack.entity.User;
 import com.example.GreenBack.entity.Vehicle;
+import com.example.GreenBack.enums.Badge;
 import com.example.GreenBack.enums.BookingStatus;
 import com.example.GreenBack.enums.Gender;
 
+import com.example.GreenBack.enums.StopoverStatus;
 import com.example.GreenBack.repository.AdminRepository;
 import com.example.GreenBack.repository.BookingRepository;
 import com.example.GreenBack.repository.UserRepository;
 import com.example.GreenBack.repository.VehicleRepository;
+import com.example.GreenBack.service.impl.RideServiceImpl;
 import com.example.GreenBack.service.impl.UserServiceImpl;
 import com.example.GreenBack.service.impl.VehicleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +25,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,15 +37,14 @@ public class GreenBackApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(VehicleRepository vehicleRepository, BookingRepository bookingRepository) {
+	public CommandLineRunner demo(VehicleRepository vehicleRepository, BookingRepository bookingRepository, UserRepository userRepository, RideServiceImpl rideService) {
 		return (args) -> {
 			List<Vehicle> list = vehicleRepository.findAll();
 			System.out.println(">>> Found vehicles: " + list.size());
 
-
-
 		};
 	}
+
 
 
 
